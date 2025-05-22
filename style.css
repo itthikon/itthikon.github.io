@@ -1,0 +1,48 @@
+* {
+    margin: 0 ;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+.sticky {
+    position: sticky;
+    top: 0%;
+}
+
+.nav_border {
+    display: block;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+
+    ul {
+        padding: 0;
+        margin: 0;
+        background-color: #111;
+    }
+    li {
+        display: inline;
+        margin: 0;
+    }
+}
+
+.active {
+    background-color: tomato;
+}
+
+.nav_link {
+    li a {
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+        padding: 20px;
+    }
+    a:hover {
+        background-color: tomato;
+    }
+  }
+
+footer {
+    height: 4000px;
+}
