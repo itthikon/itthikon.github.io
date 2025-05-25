@@ -5,12 +5,9 @@
 
 body {
     background-color: skyblue;
+    height: 4000px;
 }
 
-}
-.sticky {
-    position: sticky;
-    top: 0%;
 }
 
 .nav_border {
@@ -18,6 +15,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
+
 
 
     ul {
@@ -47,6 +45,29 @@ body {
     }
   }
 
+  header {
+    height: 400px;
+    width: 100%;
+    background-image: url("picture/picture02.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: scroll;
+    background-origin: border-box;
+    border-bottom: 10px solid tomato;
+  }
+
+  .main1 {
+    padding: 100px;
+    border: 5px solid red;
+    margin: 10px;
+    border-radius: 20px;
+  }
+
 footer {
-    height: 4000px;
+    height: 100px;
+    width: 100%;
+    background-color: seagreen;
+    border-top: 20px solid tomato;
+
 }
