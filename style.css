@@ -4,7 +4,7 @@
     box-sizing: border-box;
 
 body {
-    background-color: skyblue;
+    background-color: white;
     height: 4000px;
 }
 
@@ -59,9 +59,16 @@ body {
 
   .main1 {
     padding: 100px;
-    border: 5px solid red;
+    background-color: gray;
+    border: 5px solid tomato;
     margin: 10px;
     border-radius: 20px;
+    h3 {
+        color: greenyellow;
+    }
+    label {
+        color: #fff;
+    }
   }
 
 footer {
