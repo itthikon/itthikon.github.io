@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg-color: #0a0a1a;
+    --primary-color: #00f2ff;
+    --secondary-color: #ff00e6;
+    --text-color: #e0e0e0;
+    --text-dark: #a0a0a0;
+    --border-color: rgba(0, 242, 255, 0.3);
+    --card-bg: #1a1a2e;
+    --success-color: #00ff8c;
+    --error-color: #ff3b3b;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.2);
+}
+
+.stat-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.stat-card p#total-students {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 0.95rem;
+}
+.summary-item span:last-child {
+    font-weight: bold;
+    color: var(--success-color);
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.filter-group, .search-group {
+    display: flex;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+input[type="text"], select {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px 12px;
+    font-family: var(--font-family);
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--secondary-color);
+}
+
+.table-container {
+    overflow-x: auto;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+thead tr {
+    background-color: #2a2a3e;
+}
+
+th {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #2a2a3e;
+}
+
+.btn-edit {
+    background-color: transparent;
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+.btn-edit:hover {
+    background-color: var(--success-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px var(--success-color);
+}
+
+.spinner {
+    border: 5px solid var(--border-color);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid var(--primary-color);
+    width: 90%;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px var(--primary-color);
+    position: relative;
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-button:hover, .close-button:focus {
+    color: var(--primary-color);
+}
+
+#modal-title {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.form-field input, .form-field select {
+    width: 100%;
+    padding: 10px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 1px solid var(--text-dark);
+}
+.btn-secondary:hover {
+    background-color: var(--text-dark);
+    color: var(--bg-color);
+}
+
+#no-data-message {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-dark);
+}

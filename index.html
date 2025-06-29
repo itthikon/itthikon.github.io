@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการข้อมูลบัตรนักเรียน</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>ระบบจัดการข้อมูลบัตรนักเรียน</h1>
+            <p class="subtitle">Student Card Management System</p>
+        </header>
+
+        <section class="dashboard">
+            <div class="stat-card">
+                <h3>นักเรียนทั้งหมด</h3>
+                <p id="total-students">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>สถานะบัตรนักเรียน</h3>
+                <div id="card-status-summary"></div>
+            </div>
+            <div class="stat-card">
+                <h3>การรับบัตรนักเรียนใหม่</h3>
+                <div id="pickup-status-summary"></div>
+            </div>
+        </section>
+
+        <section class="controls">
+            <div class="filter-group">
+                <select id="grade-filter">
+                    <option value="">-- เลือกระดับชั้น --</option>
+                </select>
+                <select id="room-filter" disabled>
+                    <option value="">-- เลือกห้อง --</option>
+                </select>
+            </div>
+            <div class="search-group">
+                <input type="text" id="search-input" placeholder="ค้นหาด้วยรหัส หรือ ชื่อ-นามสกุล...">
+            </div>
+            <button id="add-student-btn" class="btn btn-primary">เพิ่มรายชื่อนักเรียน</button>
+            <button id="export-excel-btn" class="btn btn-secondary">ส่งออกเป็น Excel</button>
+            <button id="export-pdf-btn" class="btn btn-secondary">ส่งออกเป็น PDF</button>
+        </section>
+
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>เลขที่</th>
+                        <th>รหัสนักเรียน</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>ระดับชั้น</th>
+                        <th>ห้อง</th>
+                        <th>สถานะบัตร</th>
+                        <th>การรับบัตร</th>
+                        <th>หมายเหตุ</th>
+                        <th>จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody id="student-table-body">
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+            <div id="loading-spinner" class="spinner"></div>
+            <p id="no-data-message" style="display: none;">ไม่พบข้อมูลนักเรียนที่ตรงกับเงื่อนไข</p>
+        </section>
+    </div>
+
+    <!-- Modal for Add/Edit -->
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title">แบบฟอร์ม</h2>
+            <form id="student-form">
+                <input type="hidden" id="form-mode">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="no">เลขที่</label>
+                        <input type="number" id="no" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="studentId">รหัสนักเรียน</label>
+                        <input type="text" id="studentId" required>
+                    </div>
+                    <div class="form-field full-width">
+                        <label for="fullName">ชื่อ-นามสกุล</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="grade">ระดับชั้น</label>
+                        <input type="text" id="grade" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="room">ห้อง</label>
+                        <input type="text" id="room" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="cardStatus">สถานะบัตรนักเรียน</label>
+                        <select id="cardStatus" required>
+                            <option>ยังไม่กรอกข้อมูล</option>
+                            <option>บัตรใหม่เจอ</option>
+                            <option>บัตรใหม่ไม่เจอ</option>
+                            <option>นร.เดิมมีบัตร</option>
+                            <option>นร.เดิมไม่มีบัตร</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="pickupStatus">การรับบัตรนักเรียนใหม่</label>
+                        <select id="pickupStatus" required>
+                            <option>ยังไม่กรอกข้อมูล</option>
+                            <option>นร.รับแล้ว</option>
+                            <option>นร.ยังไม่รับ</option>
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <div class="form-field full-width">
+                        <label for="notes">หมายเหตุ</label>
+                        <input type="text" id="notes">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
